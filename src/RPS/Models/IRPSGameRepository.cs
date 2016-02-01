@@ -5,7 +5,9 @@ namespace RPS.Models
 {
     public interface IRPSGameRepository
     {
-        bool addGame(Guid PlayerID, int maxScore);
+        Guid? addGame(Guid PlayerID, int maxScore);
         List<RPSGame> getGames();
+        RPSGame getGameByPlayerID(Guid playerID);
+        RPSGame getGameByID(Guid gameID);
     }
 }

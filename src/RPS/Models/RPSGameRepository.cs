@@ -7,10 +7,16 @@ namespace RPS.Models
 {
     public class RPSGameRepository : IRPSGameRepository
     {
-        private List<RPSGame> games;
+        private List<RPSGame> games= new List<RPSGame>();
 
-        public bool addGame(Guid PlayerID, int maxScore)
+        public Guid? addGame(Guid PlayerID, int maxScore)
         {
+            //verify if player is already playing a game
+            if(games.Where<RPSGame>(g => g.PlayerID==PlayerID).Count<RPSGame>()>0)
+            {
+                return null;
+            }
+
             RPSGame game = new RPSGame();  //new guid generated here
             game.PlayerID = PlayerID;
             game.playerScore = 0;
@@ -18,7 +24,7 @@ namespace RPS.Models
             game.maxScore = maxScore;
             games.Add(game);
 
-            return true;
+            return game.GameID;
         }
 
 
@@ -26,6 +32,19 @@ namespace RPS.Models
         {
             return games;
         }
+
+        public RPSGame getGameByID(Guid gameID)
+        {
+            return games.Where(g => g.GameID == gameID).FirstOrDefault();
+        }
+
+        public RPSGame getGameByPlayerID (Guid playerID)
+        {
+            
+            RPSGame game=games.Where(g => g.PlayerID == playerID).FirstOrDefault();
+            return game;
+        }
+
     }
         
 }
