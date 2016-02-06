@@ -38,7 +38,7 @@ namespace RPS.Controllers.API
 
         // POST api/values
         [HttpPost]
-        public JsonResult Post([FromForm]Guid PlayerID, int score)
+        public JsonResult Post([FromForm]Guid PlayerID, [FromForm] int score)
         {
             if(ModelState.IsValid)
             {
@@ -59,6 +59,22 @@ namespace RPS.Controllers.API
             
 
         }
+
+        [HttpPost("play")]
+        public JsonResult playGame([FromForm] Guid GameID, [FromForm] string playerChoice)
+        {
+            if(ModelState.IsValid)
+            {
+                RPSGame theGame = _gameRepo.getGameByID(GameID);
+                return Json(theGame.play(playerChoice));
+
+            }
+            else
+            {
+                return Json(new { error = "Game does not exist" });
+            }
+        }
+
 
         // PUT api/values/5
         /*[HttpPut("{id}")]

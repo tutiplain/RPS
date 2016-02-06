@@ -2,12 +2,22 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using RPS.Services;
 
 namespace RPS.Models
 {
     public class RPSGameRepository : IRPSGameRepository
     {
+
+        private IRandomNumberService _rnd;
+
         private List<RPSGame> games= new List<RPSGame>();
+
+        
+        public RPSGameRepository(IRandomNumberService serv)
+        {
+            _rnd = serv;
+        }
 
         public Guid? addGame(Guid PlayerID, int maxScore)
         {
@@ -17,7 +27,7 @@ namespace RPS.Models
                 return null;
             }
 
-            RPSGame game = new RPSGame();  //new guid generated here
+            RPSGame game = new RPSGame(_rnd);  //new guid generated here
             game.PlayerID = PlayerID;
             game.playerScore = 0;
             game.serverScore = 0;
