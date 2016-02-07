@@ -68,8 +68,8 @@ namespace RPS.Models
                 }
             }
 
-            if (action == "win") { this.playerScore++; }
-            if (action == "lose") { this.serverScore++; }
+            if (result == "win") { this.playerScore++; }
+            if (result == "lose") { this.serverScore++; }
 
             return new { action=action, stats=this.gameStats() };
         }

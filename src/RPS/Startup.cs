@@ -73,7 +73,8 @@ namespace RPS
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller}/{action}/{id?}",
+                    defaults: new { controller= "RPSMain", action = "Index" });
             });
         }
 
