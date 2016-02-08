@@ -7,5 +7,22 @@
 <form method="post" asp-controller="">
     <label for="txtName">Name</label>
     <input type="text" name="name" id="txtName" />
-    <input type="submit" value="Register!"/>
+    <input type="button" id="btnSubmit" value="Register!"/>
 </form>
+
+<div id="regStatus"></div>
+
+@section scripts
+{
+    <script type="text/javascript">
+        alert('Mi script hizo algo coño');
+        $("#btnSubmit").click(function () {
+            
+            $.post("/api/players", { name: $("#txtName").text() }, function (e) {
+                alert(e);
+            });
+
+        });
+</script>
+}
+
