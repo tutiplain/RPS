@@ -18,7 +18,7 @@
         $("#btnSubmit").click(function () {
             
             $.post("/api/players", { name: $("#txtName").val() }, function (e) {
-                alert(e);
+                alert("You have registered as " +e.playerName+" and your ID is "+e.PlayerID);
             });
 
         });
